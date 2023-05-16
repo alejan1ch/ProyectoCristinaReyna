@@ -15,7 +15,7 @@ client = supabase.create_client(SUPABASE_URL, SUPABASE_KEY)
 # consulta los productos de la tabla Productos
 response = client.from_('Productos').select('*').execute()
 
-# imprime los datos obtenido
+# imprime los datos obtenid
 
 
 
