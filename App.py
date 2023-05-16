@@ -2,8 +2,11 @@ from flask import Flask, render_template, request, make_response
 from reportlab.pdfgen import canvas
 from io import BytesIO
 from Supa import datos
-
+import os
+import dotenv
 app = Flask(__name__)
+dotenv.load_dotenv()
+
 
 # Variable global para almacenar los datos
 items = []
@@ -12,7 +15,7 @@ items = []
 @app.before_request
 def cargar_datos():
     global items
-    items = datos("https://ymhtktsffxmaajexzney.supabase.co/rest/v1/Productos?select=*","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InltaHRrdHNmZnhtYWFqZXh6bmV5Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4NDA0NDcyNCwiZXhwIjoxOTk5NjIwNzI0fQ.aw9AKo_rs39WTNGjorSexD79k-Izt5cmUdDCnBcVXfM")
+    items = datos(os.environ.get('URL'),os.environ.get('KEY'))
 
 @app.route('/')
 def home():
